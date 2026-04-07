@@ -28,13 +28,8 @@ resource "azurerm_resource_group" "arg" {
 
 resource "azurerm_mssql_server" "mssql" {
   name                         = var.sql_server_name
-<<<<<<< HEAD
-  resource_group_name          = azurerm_resource_group.arg.name      
-  location                     = azurerm_resource_group.arg.location  
-=======
-  resource_group_name          = azurerm_resource_group.arg.name
-  location                     = azurerm_resource_group.arg.location
->>>>>>> 6423de2 (Updated main.tf)
+  resource_group_name          = azurerm_resource_group.arg.name     # ← fixed
+  location                     = azurerm_resource_group.arg.location # ← fixed
   version                      = "12.0"
   administrator_login          = var.sql_admin_login
   administrator_login_password = var.sql_admin_password
@@ -59,26 +54,16 @@ resource "azurerm_mssql_firewall_rule" "firewall" {
 
 resource "azurerm_service_plan" "asp" {
   name                = var.app_service_plan_name
-<<<<<<< HEAD
-  resource_group_name = azurerm_resource_group.arg.name      
-  location            = azurerm_resource_group.arg.location  
-=======
-  resource_group_name = azurerm_resource_group.arg.name
-  location            = azurerm_resource_group.arg.location
->>>>>>> 6423de2 (Updated main.tf)
+  resource_group_name = azurerm_resource_group.arg.name     # ← fixed
+  location            = azurerm_resource_group.arg.location # ← fixed
   os_type             = "Linux"
   sku_name            = "F1"
 }
 
 resource "azurerm_linux_web_app" "alwa" {
   name                = var.app_service_name
-<<<<<<< HEAD
-  resource_group_name = azurerm_resource_group.arg.name      
-  location            = azurerm_resource_group.arg.location  
-=======
-  resource_group_name = azurerm_resource_group.arg.name
-  location            = azurerm_resource_group.arg.location
->>>>>>> 6423de2 (Updated main.tf)
+  resource_group_name = azurerm_resource_group.arg.name     # ← fixed
+  location            = azurerm_resource_group.arg.location # ← fixed
   service_plan_id     = azurerm_service_plan.asp.id
 
   connection_string {
@@ -101,4 +86,3 @@ resource "azurerm_app_service_source_control" "aassc" {
   branch                 = "main"
   use_manual_integration = true
 }
-
