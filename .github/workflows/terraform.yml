@@ -46,3 +46,9 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false -out=tfplan
+
+    - name: Save plan as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: tfplan
+        path: tfplan
