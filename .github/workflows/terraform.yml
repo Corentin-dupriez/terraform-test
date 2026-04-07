@@ -61,10 +61,10 @@ jobs:
       - name: Checkput the repository
         uses: actions/checkout@v4
         
-      - name: Login to Azure via CLI
+      - name: Login to Azure CLI
         uses: azure/login@v1
         with:
-          creds: #{{secrets.AZURE_CREDENTIALS}}
+          creds: ${{secrets.AZURE_CREDENTIALS}}
           
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
