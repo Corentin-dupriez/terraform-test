@@ -52,3 +52,28 @@ jobs:
       with:
         name: tfplan
         path: tfplan
+        
+  terraform_apply:
+    needs: terraform-plan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkput the repository
+        uses: actions/checkout@v4
+        
+      - name: Login to Azure via CLI
+        uses: azure/login@v1
+        with:
+          creds: #{{secrets.AZURE_CREDENTIALS}}
+          
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Download a build artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: tfplan
+
+      - name: Terraform apply
+        run: terraform apply -auto-approve tfplan
